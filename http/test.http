@@ -1,0 +1,8 @@
+POST http://localhost:8080/validUser
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "passWord":"123" }
+
+###
