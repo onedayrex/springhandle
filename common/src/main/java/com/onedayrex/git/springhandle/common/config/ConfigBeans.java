@@ -5,12 +5,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.List;
 
 @Configuration
-public class ConfigBeans extends WebMvcConfigurerAdapter {
+public class ConfigBeans implements WebMvcConfigurer {
 
     @Bean
     public UserInfoHandleResolver userInfoHandleResolver() {
