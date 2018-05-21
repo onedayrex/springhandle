@@ -3,6 +3,8 @@ package com.onedayrex.git.springhandle.api.controller;
 import com.onedayrex.git.springhandle.common.bean.User;
 import com.onedayrex.git.springhandle.common.bean.UserReq;
 import com.onedayrex.git.springhandle.common.mapper.UserInfoMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class MainController {
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
     @Autowired
     private UserInfoMapper userInfoMapper;
 
@@ -22,7 +28,19 @@ public class MainController {
 
     @RequestMapping("/add")
     public Object add(User user) {
-        userInfoMapper.insert(user);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    List<User> userList = new ArrayList<>();
+                    for (int i = 0; i < 5000; i++) {
+                        userList.add(user);
+                    }
+                    userInfoMapper.insertList(userList);
+                    logger.info("==>insert into table");
+                }
+            }
+        }).start();
         return "OK";
     }
 

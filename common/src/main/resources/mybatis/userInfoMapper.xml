@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onedayrex.git.springhandle.common.mapper.UserInfoMapper">
+
+
+    <insert id="insertList">
+        insert into user_info(user_name,pass_word)
+        values
+        <foreach collection="userList" index="index" separator="," item="user">
+            (#{user.userName},#{user.passWord})
+        </foreach>
+    </insert>
+</mapper>
