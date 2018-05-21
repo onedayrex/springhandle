@@ -1,1 +1,3 @@
 rootProject.name = 'springhandle'
+include 'api'
+include 'main'
