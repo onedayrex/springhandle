@@ -1,4 +1,3 @@
-
 dependencies{
-    compile(":main")
+    compile project(":common")
 }
