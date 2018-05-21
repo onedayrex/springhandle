@@ -35,4 +35,9 @@ public class MainController {
     public Object validUser(@RequestBody @Validated UserReq user) {
         return user;
     }
+
+    @RequestMapping("/thr")
+    public Object thr() {
+        throw new RuntimeException();
+    }
 }
