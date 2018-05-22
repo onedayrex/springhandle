@@ -2,9 +2,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: root
+    url: jdbc:mysql://${db.host}:${db.port}/${db.name}?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ${db.username}
+    password: ${db.password}
 mybatis:
   type-aliases-package: com.neo.entity
   mapper-locations: classpath:mybatis/*.xml
