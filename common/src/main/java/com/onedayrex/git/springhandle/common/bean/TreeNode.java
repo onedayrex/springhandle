@@ -18,27 +18,28 @@ public class TreeNode {
             root = node;
             return;
         }
-        node.parent = root;
-        addNode(node);
-    }
-
-    private void addNode(Node node) {
-        if (node.parent.value <= node.value) {
-            //比父节点大，向右走
-            if (node.parent.right == null) {
-                node.parent.right = node;
+        Node parent = root;
+        while (true) {
+            if (parent.value <= node.value) {
+                //比父节点大，向右走
+                if (parent.right == null) {
+                    parent.right = node;
+                    break;
+                }else {
+                    parent = parent.right;
+                    continue;
+                }
             }else {
-                node.parent = node.parent.right;
-                addNode(node);
-            }
-        }else {
-            //比父节点小，向左走
-            if (node.parent.left == null) {
-                node.parent.left = node;
-            }else {
-                node.parent = node.parent.left;
-                addNode(node);
+                //比父节点小，向左走
+                if (parent.left == null) {
+                    parent.left = node;
+                    break;
+                }else {
+                    parent = parent.left;
+                    continue;
+                }
             }
         }
     }
+
 }
