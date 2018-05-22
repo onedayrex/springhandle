@@ -8,3 +8,6 @@ spring:
 mybatis:
   type-aliases-package: com.neo.entity
   mapper-locations: classpath:mybatis/*.xml
+
+properties:
+  file: classpath:config.properties

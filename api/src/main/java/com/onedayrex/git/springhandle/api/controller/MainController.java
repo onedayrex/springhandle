@@ -6,6 +6,7 @@ import com.onedayrex.git.springhandle.common.mapper.UserInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
     @Autowired
     private UserInfoMapper userInfoMapper;
+    @Value("${db.host}")
+    private String dbHost;
 
     @RequestMapping("/index")
     public Object index(User user) {
@@ -57,5 +60,10 @@ public class MainController {
     @RequestMapping("/thr")
     public Object thr() {
         throw new RuntimeException();
+    }
+
+    @RequestMapping("/properties")
+    public Object properties() {
+        return dbHost;
     }
 }
