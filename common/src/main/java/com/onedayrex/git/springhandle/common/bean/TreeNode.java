@@ -3,12 +3,27 @@ package com.onedayrex.git.springhandle.common.bean;
 public class TreeNode {
     private Node root;
 
-    private class Node{
+    public class Node{
         private Node parent;
         private int value;
         private Node left;
         private Node right;
 
+        public Node getParent() {
+            return parent;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public Node getLeft() {
+            return left;
+        }
+
+        public Node getRight() {
+            return right;
+        }
     }
 
     public void add(int value) {
@@ -40,6 +55,25 @@ public class TreeNode {
                     parent = parent.left;
                     continue;
                 }
+            }
+        }
+    }
+
+    public Node find(int key) {
+        Node current = root;
+        while (true) {
+            if (current == null) {
+                //tree is empty
+                return null;
+            }
+            if (current.value == key) {
+                return current;
+            } else if (current.value < key) {
+                //right
+                current = current.right;
+            }else {
+                //left
+                current = current.left;
             }
         }
     }
