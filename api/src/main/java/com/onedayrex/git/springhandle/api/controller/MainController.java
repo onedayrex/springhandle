@@ -7,11 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,8 @@ public class MainController {
     private UserInfoMapper userInfoMapper;
     @Value("${db.host}")
     private String dbHost;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @RequestMapping("/index")
     public Object index(User user) {
@@ -65,5 +69,11 @@ public class MainController {
     @RequestMapping("/properties")
     public Object properties() {
         return dbHost;
+    }
+
+    @RequestMapping("/resttemplate")
+    public Object restTemplate() {
+        ResponseEntity<String> resp = restTemplate.getForEntity("http://www.baidu.com", String.class);
+        return resp.getBody().toString();
     }
 }
