@@ -35,17 +35,14 @@ public class MainController {
 
     @RequestMapping("/add")
     public Object add(User user) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    List<User> userList = new ArrayList<>();
-                    for (int i = 0; i < 5000; i++) {
-                        userList.add(user);
-                    }
-                    userInfoMapper.insertList(userList);
-                    logger.info("==>insert into table");
+        new Thread(() -> {
+            while (true) {
+                List<User> userList = new ArrayList<>();
+                for (int i = 0; i < 5000; i++) {
+                    userList.add(user);
                 }
+                userInfoMapper.insertList(userList);
+                logger.info("==>insert into table");
             }
         }).start();
         return "OK";
