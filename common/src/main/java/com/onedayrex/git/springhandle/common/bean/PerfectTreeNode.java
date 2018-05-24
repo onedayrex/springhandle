@@ -21,6 +21,17 @@ public class PerfectTreeNode {
         }
     }
 
+    /**
+     * DLR
+     */
+    public String preOrder() {
+        Node current = nodeList.get(0);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < nodeList.size() / 2; i++) {
+        }
+        return null;
+    }
+
 
     private static class Node{
         private Node left;
