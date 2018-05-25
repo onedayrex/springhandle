@@ -1,10 +1,12 @@
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
+    type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://${db.host}:${db.port}/${db.name}?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: ${db.username}
     password: ${db.password}
+    dbcp2:
+      fast-fail-validation: true
 mybatis:
   type-aliases-package: com.neo.entity
   mapper-locations: classpath:mybatis/*.xml

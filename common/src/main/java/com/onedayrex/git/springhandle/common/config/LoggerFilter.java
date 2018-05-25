@@ -1,5 +1,6 @@
 package com.onedayrex.git.springhandle.common.config;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,9 @@ public class LoggerFilter implements Filter {
                 sb.append(entry.getValue());
                 sb.append(",");
             }
-            sb.deleteCharAt(sb.length() - 1);
+            if (StringUtils.isNotBlank(sb)) {
+                sb.deleteCharAt(sb.length() - 1);
+            }
             chain.doFilter(request,response);
         }
         logger.info("filter param==>[{}]",sb);
