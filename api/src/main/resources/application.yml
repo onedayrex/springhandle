@@ -7,9 +7,12 @@ spring:
     password: ${db.password}
     dbcp2:
       fast-fail-validation: true
+  flyway:
+    locations: classpath:/db
 mybatis:
   type-aliases-package: com.neo.entity
   mapper-locations: classpath:mybatis/*.xml
 
 properties:
   file: classpath:config.properties
+
