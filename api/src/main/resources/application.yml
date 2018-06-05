@@ -9,6 +9,7 @@ spring:
       fast-fail-validation: true
   flyway:
     locations: classpath:/db
+    enabled: false
 mybatis:
   type-aliases-package: com.neo.entity
   mapper-locations: classpath:mybatis/*.xml

@@ -17,6 +17,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 public class MainController {
@@ -72,5 +74,11 @@ public class MainController {
     public Object restTemplate() {
         ResponseEntity<String> resp = restTemplate.getForEntity("http://www.baidu.com", String.class);
         return resp.getBody().toString();
+    }
+
+    @RequestMapping(value = "/streamapi")
+    public Object streamApi() {
+        List<Integer> collect = Stream.of(1, 4, 5, 3, 5, 6, 32, 8, 89).filter(data -> data > 3).collect(Collectors.toList());
+        return collect;
     }
 }
