@@ -42,7 +42,7 @@ public class LoggerFilter implements Filter {
             }
             chain.doFilter(request,response);
         }
-        logger.info("filter param==>[{}]",sb);
+        logger.info("[{}] param==>[{}]",req.getRequestURL(),sb);
     }
 
     @Override
