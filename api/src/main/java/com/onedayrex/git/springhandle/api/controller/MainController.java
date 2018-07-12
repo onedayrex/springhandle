@@ -5,14 +5,15 @@ import com.onedayrex.git.springhandle.common.bean.UserReq;
 import com.onedayrex.git.springhandle.common.mapper.UserInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class MainController {
     private String dbHost;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private ApplicationContext context;
 
     @RequestMapping("/index")
     public Object index(User user) {
@@ -73,12 +76,21 @@ public class MainController {
     @RequestMapping("/resttemplate")
     public Object restTemplate() {
         ResponseEntity<String> resp = restTemplate.getForEntity("http://www.baidu.com", String.class);
+        ((MainController) AopContext.currentProxy()).streamApi();
         return resp.getBody().toString();
     }
 
     @RequestMapping(value = "/streamapi")
+    @Transactional(rollbackFor = Exception.class)
     public Object streamApi() {
         List<Integer> collect = Stream.of(1, 4, 5, 3, 5, 6, 32, 8, 89).filter(data -> data > 3).collect(Collectors.toList());
+        User user = new User();
+        user.setUserName("cssfs");
+        user.setPassWord("wwwwww");
+        userInfoMapper.insert(user);
+        if ("1".equals("1")) {
+            throw new RuntimeException("xxxxx");
+        }
         return collect;
     }
 }
