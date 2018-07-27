@@ -1,5 +1,6 @@
 package com.onedayrex.git.springhandle.api.controller;
 
+import com.onedayrex.git.springhandle.common.annotation.PrintBean;
 import com.onedayrex.git.springhandle.common.bean.User;
 import com.onedayrex.git.springhandle.common.bean.UserReq;
 import com.onedayrex.git.springhandle.common.mapper.UserInfoMapper;
@@ -34,6 +35,7 @@ public class MainController {
     private ApplicationContext context;
 
     @RequestMapping("/index")
+    @PrintBean(name = "MainController")
     public Object index(User user) {
         return user;
     }
