@@ -4,6 +4,10 @@ import com.onedayrex.git.springhandle.common.annotation.PrintBean;
 import com.onedayrex.git.springhandle.common.bean.User;
 import com.onedayrex.git.springhandle.common.bean.UserReq;
 import com.onedayrex.git.springhandle.common.mapper.UserInfoMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.AopContext;
@@ -23,6 +27,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
+@Api(value = "主页api")
 public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
     @Autowired
@@ -60,7 +65,12 @@ public class MainController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/validUser",method = RequestMethod.POST)
+    @PostMapping(value = "/validUser")
+    @ApiOperation("字段验证")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userName",required = true),
+            @ApiImplicitParam(name = "passWord",required = true)
+    })
     public Object validUser(@RequestBody @Validated UserReq user) {
         return user;
     }
