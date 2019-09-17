@@ -1,5 +1,7 @@
 package com.onedayrex.git.springhandle.api.controller;
 
+import com.onedayrex.git.springhandle.api.bean.OrderInfo;
+import com.onedayrex.git.springhandle.api.bean.Request;
 import com.onedayrex.git.springhandle.common.annotation.PrintBean;
 import com.onedayrex.git.springhandle.common.bean.User;
 import com.onedayrex.git.springhandle.common.bean.UserReq;
@@ -104,5 +106,14 @@ public class MainController {
             throw new RuntimeException("xxxxx");
         }
         return collect;
+    }
+
+    /**
+     * 嵌套字段验证
+     * @return
+     */
+    @PostMapping(value = "/validRequest")
+    public Object validRequest(@RequestBody @Validated Request<OrderInfo> request) {
+        return request;
     }
 }
