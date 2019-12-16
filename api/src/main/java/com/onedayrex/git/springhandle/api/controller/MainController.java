@@ -1,5 +1,6 @@
 package com.onedayrex.git.springhandle.api.controller;
 
+import com.onedayrex.git.springhandle.api.annotation.LoginUser;
 import com.onedayrex.git.springhandle.api.bean.OrderInfo;
 import com.onedayrex.git.springhandle.api.bean.Request;
 import com.onedayrex.git.springhandle.common.annotation.PrintBean;
@@ -115,5 +116,12 @@ public class MainController {
     @PostMapping(value = "/validRequest")
     public Object validRequest(@RequestBody @Validated Request<OrderInfo> request) {
         return request;
+    }
+
+
+    @PostMapping(value = "loginUser")
+    public Object loginUser(@LoginUser String token) {
+        logger.info("user login token is ==>[{}]", token);
+        return token;
     }
 }
